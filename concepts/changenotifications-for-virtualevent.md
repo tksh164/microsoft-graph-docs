@@ -22,7 +22,7 @@ To get change notifications for virtual events, you may specify the resource as 
 |:--------------------------------------|:---------------------------------------------------------|:-------------------|
 | Delegated (work or school account)    | Not supported.                                           | Not supported.     |
 | Delegated (personal Microsoft account)| Not supported.                                           | Not supported.     |
-| Application                           | CurrentlyNotYetApprovedPermission                        | beta               |
+| Application                           | VirutalEvent.Read.All                                    | beta               |
 
 ### Subscription payload example
 
