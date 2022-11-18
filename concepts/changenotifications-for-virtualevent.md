@@ -52,18 +52,14 @@ The below table indicates the supported notification and change types for the vi
 
 ### Notification types
 
-| Notification type      | Resource id                                                               | Change types      |
-|:-----------------------|:--------------------------------------------------------------------------|:------------------|
-| [Event]()              | *2.* /events/{eventId}                                                    | updated, deleted  |
-| [Session]()            | *2.* /events/{eventId}/sessions/{onlineMeetingId}                         | created, updated  |
-| [Registrant]()         | *2.* /events/{eventId}/attendees/{registrantId}/registration              | *1.* register/cancel  |
+| Notification type      | Resource id                                                                                 | Change types    |
+|:-----------------------|:--------------------------------------------------------------------------------------------|:----------------|
+| [Event]()              | solutions/virtualEvents/events/{eventId}                                                    | updated, deleted  |
+| [Session]()            | solutions/virtualEvents/events/{eventId}/sessions/{onlineMeetingId}                         | created, updated  |
+| [Registrant]()         | solutions/virtualEvents/events/{eventId}/attendees/{registrantId}/registration              | created, deleted  |
 
-*1. Are these states allowed? I am assuming that this will be created and deleted*
-
-*2. Are we going to be adding `solutions/virtualEvents/` prefix to the resources?*
-
-
-### Notification example
+## Event notification examples
+### Event updated
 
 ```HTTP
 {
@@ -72,12 +68,108 @@ The below table indicates the supported notification and change types for the vi
     "clientState": "secret client state",
     "changeType": "updated",
     "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
-    "resource": "/events/{eventId}",
+    "resource": "solutions/virtualEvents/events/{eventId}/",
+    "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
+    "resourceData": {
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/",
+      "@odata.type": "#microsoft.graph.virtualEvent",
+      "id": "solutions/virtualEvents/events/{eventId}/"
+    }
+  }]
+}
+```
+
+### Event deleted
+
+```HTTP
+{
+  "value": [{
+    "subscriptionId": "7015b436-a8b8-4260-af80-5af8cba32e62",
+    "clientState": "secret client state",
+    "changeType": "deleted",
+    "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
+    "resource": "solutions/virtualEvents/events/{eventId}/",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "events/{eventId} ",
       "@odata.type": "#microsoft.graph.virtualEvent",
       "id": "events/{eventId} "
+    }
+  }]
+}
+```
+## Session notification examples
+### Session created
+```HTTP
+{
+  "value": [{
+    "subscriptionId": "7015b436-a8b8-4260-af80-5af8cba32e62",
+    "clientState": "secret client state",
+    "changeType": "created",
+    "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
+    "resource": "solutions/virtualEvents/events/{eventId}/",
+    "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
+    "resourceData": {
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{onlineMeetingId}",
+      "@odata.type": "#microsoft.graph.virtualEvent",
+      "id": "solutions/virtualEvents/events/{eventId}/sessions/{onlineMeetingId}"
+    }
+  }]
+}
+```
+
+### Session updated
+```HTTP
+{
+  "value": [{
+    "subscriptionId": "7015b436-a8b8-4260-af80-5af8cba32e62",
+    "clientState": "secret client state",
+    "changeType": "updated",
+    "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
+    "resource": "solutions/virtualEvents/events/{eventId}/",
+    "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
+    "resourceData": {
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{onlineMeetingId}",
+      "@odata.type": "#microsoft.graph.virtualEvent",
+      "id": "solutions/virtualEvents/events/{eventId}/sessions/{onlineMeetingId}"
+    }
+  }]
+}
+```
+## Registrant notifications examples
+### Registrant created
+```HTTP
+{
+  "value": [{
+    "subscriptionId": "7015b436-a8b8-4260-af80-5af8cba32e62",
+    "clientState": "secret client state",
+    "changeType": "created",
+    "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
+    "resource": "solutions/virtualEvents/events/{eventId}/",
+    "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
+    "resourceData": {
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/attendees/{registrantId}/registration",
+      "@odata.type": "#microsoft.graph.virtualEvent",
+      "id": "solutions/virtualEvents/events/{eventId}/attendees/{registrantId}/registration"
+    }
+  }]
+}
+```
+
+### Registrant deleted
+```HTTP
+{
+  "value": [{
+    "subscriptionId": "7015b436-a8b8-4260-af80-5af8cba32e62",
+    "clientState": "secret client state",
+    "changeType": "deleted",
+    "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
+    "resource": "solutions/virtualEvents/events/{eventId}/",
+    "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
+    "resourceData": {
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/attendees/{registrantId}/registration",
+      "@odata.type": "#microsoft.graph.virtualEvent",
+      "id": "solutions/virtualEvents/events/{eventId}/attendees/{registrantId}/registration"
     }
   }]
 }
