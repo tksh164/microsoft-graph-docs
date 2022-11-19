@@ -9,7 +9,7 @@ ms.custom: scenarios:getting-started
 
 # Get change notifications for Microsoft Teams virtual event updates
 
-## Subscribe to notifications for virtual event messages.
+## Subscribe to notifications for virtual event updates.
 
 To get change notifications for virtual events, you may specify the resource as the following: 
 - `solutions/virtualEvents/events` to receive notifications for all virtual events in tenant. 
@@ -32,7 +32,7 @@ Content-Type: application/json
 
 {
   "changeType": "updated",
-  "notificationUrl": "https://notificationEnpoint/api/",
+  "notificationUrl": "https://webhook.contoso.com/api",
   "resource": "solutions/virtualEvents/events/{eventId} ",
   "expirationDateTime": "2021-02-01T11:00:00.0000000Z",
   "clientState": "secretClientState"
@@ -55,8 +55,8 @@ The below table indicates the supported notification and change types for the vi
 | Notification type      | Resource id                                                                                 | Change types    |
 |:-----------------------|:--------------------------------------------------------------------------------------------|:----------------|
 | [Event]()              | solutions/virtualEvents/events/{eventId}                                                    | updated, deleted  |
-| [Session]()            | solutions/virtualEvents/events/{eventId}/sessions/{onlineMeetingId}                         | created, updated  |
-| [Registrant]()         | solutions/virtualEvents/events/{eventId}/attendees/{registrantId}/registration              | created, deleted  |
+| [Session]()            | solutions/virtualEvents/events/{eventId}/sessions/{sessionId}                         | created, updated  |
+| [Registrant]()         | solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}              | created, deleted  |
 
 ## Event notification examples
 ### Event updated
@@ -110,9 +110,9 @@ The below table indicates the supported notification and change types for the vi
     "resource": "solutions/virtualEvents/events/{eventId}/",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
-      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{onlineMeetingId}",
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
       "@odata.type": "#microsoft.graph.virtualEvent",
-      "id": "solutions/virtualEvents/events/{eventId}/sessions/{onlineMeetingId}"
+      "id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}"
     }
   }]
 }
@@ -129,9 +129,9 @@ The below table indicates the supported notification and change types for the vi
     "resource": "solutions/virtualEvents/events/{eventId}/",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
-      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{onlineMeetingId}",
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
       "@odata.type": "#microsoft.graph.virtualEvent",
-      "id": "solutions/virtualEvents/events/{eventId}/sessions/{onlineMeetingId}"
+      "id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}"
     }
   }]
 }
@@ -148,9 +148,9 @@ The below table indicates the supported notification and change types for the vi
     "resource": "solutions/virtualEvents/events/{eventId}/",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
-      "@odata.id": "solutions/virtualEvents/events/{eventId}/attendees/{registrantId}/registration",
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}",
       "@odata.type": "#microsoft.graph.virtualEvent",
-      "id": "solutions/virtualEvents/events/{eventId}/attendees/{registrantId}/registration"
+      "id": "solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}"
     }
   }]
 }
@@ -167,9 +167,9 @@ The below table indicates the supported notification and change types for the vi
     "resource": "solutions/virtualEvents/events/{eventId}/",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
-      "@odata.id": "solutions/virtualEvents/events/{eventId}/attendees/{registrantId}/registration",
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}",
       "@odata.type": "#microsoft.graph.virtualEvent",
-      "id": "solutions/virtualEvents/events/{eventId}/attendees/{registrantId}/registration"
+      "id": "solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}"
     }
   }]
 }

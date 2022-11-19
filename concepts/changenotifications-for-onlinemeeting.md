@@ -31,7 +31,7 @@ Content-Type: application/json
 
 {
   "changeType": "updated",
-  "notificationUrl": "https://notificationurl/api/",
+  "notificationUrl": "https://webhook.contoso.com/api",
   "resource": "/communications/onlineMeetings/?$filter=JoinWebUrl eq '{JoinWebUrl}'",
   "includeResourceData": true,
   "encryptionCertificate": "{base64encodedCertificate}",
