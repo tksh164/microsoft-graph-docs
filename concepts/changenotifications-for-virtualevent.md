@@ -54,11 +54,30 @@ The below table indicates the supported notification and change types for the vi
 
 | Notification type      | Resource id                                                                                 | Change types    |
 |:-----------------------|:--------------------------------------------------------------------------------------------|:----------------|
-| [Event]()              | solutions/virtualEvents/events/{eventId}                                                    | updated, deleted  |
-| [Session]()            | solutions/virtualEvents/events/{eventId}/sessions/{sessionId}                         | created, updated  |
-| [Registrant]()         | solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}              | created, deleted  |
+| [Event]()              | solutions/virtualEvents/events/{eventId}                                                    | *created*, updated, deleted  |
+| [Session]()            | solutions/virtualEvents/events/{eventId}/sessions/{sessionId}                         | created, updated, *deleted*  |
+| [Registrant]()         | solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}              | created, *updated*, *deleted*  |
 
 ## Event notification examples
+### Event created --> Listed as Postbuild in the docs.
+```HTTP
+{
+  "value": [{
+    "subscriptionId": "7015b436-a8b8-4260-af80-5af8cba32e62",
+    "clientState": "secret client state",
+    "changeType": "created",
+    "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
+    "resource": "solutions/virtualEvents/events/{eventId}/",
+    "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
+    "resourceData": {
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/",
+      "@odata.type": "#microsoft.graph.virtualEvent",
+      "id": "solutions/virtualEvents/events/{eventId}/"
+    }
+  }]
+}
+```
+
 ### Event updated
 
 ```HTTP
@@ -98,6 +117,7 @@ The below table indicates the supported notification and change types for the vi
   }]
 }
 ```
+
 ## Session notification examples
 ### Session created
 ```HTTP
@@ -136,6 +156,27 @@ The below table indicates the supported notification and change types for the vi
   }]
 }
 ```
+
+### Session deleted --> Not listed in requirements
+**Is this going to be a real notification
+```HTTP
+{
+  "value": [{
+    "subscriptionId": "7015b436-a8b8-4260-af80-5af8cba32e62",
+    "clientState": "secret client state",
+    "changeType": "deleted",
+    "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
+    "resource": "solutions/virtualEvents/events/{eventId}/",
+    "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
+    "resourceData": {
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
+      "@odata.type": "#microsoft.graph.virtualEvent",
+      "id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}"
+    }
+  }]
+}
+```
+
 ## Registrant notifications examples
 ### Registrant created
 ```HTTP
@@ -156,7 +197,26 @@ The below table indicates the supported notification and change types for the vi
 }
 ```
 
-### Registrant deleted
+### Registrant updated --> Is this registrant canceled event?
+```HTTP
+{
+  "value": [{
+    "subscriptionId": "7015b436-a8b8-4260-af80-5af8cba32e62",
+    "clientState": "secret client state",
+    "changeType": "updated",
+    "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
+    "resource": "solutions/virtualEvents/events/{eventId}/",
+    "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
+    "resourceData": {
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}",
+      "@odata.type": "#microsoft.graph.virtualEvent",
+      "id": "solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}"
+    }
+  }]
+}
+```
+
+### Registrant deleted --> Is this registrant canceled event?
 ```HTTP
 {
   "value": [{
