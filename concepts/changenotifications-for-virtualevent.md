@@ -110,9 +110,9 @@ The below table indicates the supported notification and change types for the vi
     "resource": "solutions/virtualEvents/events/{eventId}/",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
-      "@odata.id": "events/{eventId} ",
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/",
       "@odata.type": "#microsoft.graph.virtualEvent",
-      "id": "events/{eventId} "
+      "id": "solutions/virtualEvents/events/{eventId}/"
     }
   }]
 }
