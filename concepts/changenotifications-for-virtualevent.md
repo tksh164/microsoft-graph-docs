@@ -24,8 +24,21 @@ To get change notifications for virtual events, you may specify the resource as 
 | Delegated (personal Microsoft account)| Not supported.                                           | Not supported.     |
 | Application                           | VirutalEvent.Read.All                                    | beta               |
 
-### Subscription payload example
+### Subscription to all events in tenant
+```HTTP
+POST https://graph.microsoft.com/beta/subscriptions
+Content-Type: application/json
 
+{
+  "changeType": "updated",
+  "notificationUrl": "https://webhook.contoso.com/api",
+  "resource": "solutions/virtualEvents/events",
+  "expirationDateTime": "2021-02-01T11:00:00.0000000Z",
+  "clientState": "secretClientState"
+}
+```
+
+### Subscription to specific event
 ```HTTP
 POST https://graph.microsoft.com/beta/subscriptions
 Content-Type: application/json
@@ -38,6 +51,7 @@ Content-Type: application/json
   "clientState": "secretClientState"
 }
 ```
+
 
 ## Receiving event notifications
 
@@ -157,8 +171,7 @@ The below table indicates the supported notification and change types for the vi
 }
 ```
 
-### Session deleted --> Not listed in requirements
-**Is this going to be a real notification
+### Session deleted
 ```HTTP
 {
   "value": [{
@@ -197,26 +210,7 @@ The below table indicates the supported notification and change types for the vi
 }
 ```
 
-### Registrant updated --> Is this registrant canceled event?
-```HTTP
-{
-  "value": [{
-    "subscriptionId": "7015b436-a8b8-4260-af80-5af8cba32e62",
-    "clientState": "secret client state",
-    "changeType": "updated",
-    "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
-    "resource": "solutions/virtualEvents/events/{eventId}/",
-    "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
-    "resourceData": {
-      "@odata.id": "solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}",
-      "@odata.type": "#microsoft.graph.virtualEvent",
-      "id": "solutions/virtualEvents/events/{eventId}/virtualEventWebinar/registration/registrants/{registrantId}"
-    }
-  }]
-}
-```
-
-### Registrant deleted --> Is this registrant canceled event?
+### Registrant deleted
 ```HTTP
 {
   "value": [{
