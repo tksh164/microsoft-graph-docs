@@ -102,7 +102,7 @@ Content-Type: application/json
 }
 ```
 
-### Subscribe to all sessions for a particular event
+### Subscribe to all sessions' changes for a particular event.
 
 Session notifications for a particular event can be subscribed to by specifying the resource as `solutions/virtualEvents/events/{eventId}/sessions`.
 
@@ -346,7 +346,7 @@ For more information about the types of notifications received for meeting call 
 }
 ```
 
-### Registrant created
+### Registrant updated
 ```HTTP
 {
   "value": [{
