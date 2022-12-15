@@ -11,7 +11,7 @@ ms.custom: scenarios:getting-started
 
 ## Subscribe to notifications for virtual event updates.
 
-Please review webhook subscriptions for more details about the subscription payload.
+Please review webhook subscriptions for more details about the subscription payload. Subscriptions to virtual event resources have a max expiration time of 3 days. Subscriptions must either be created again or renewed. Please review [Subscriptions]() for more details.
 
 ### Permissions
 
@@ -168,11 +168,6 @@ Content-Type: application/json
 
 ## Receiving event notifications
 
-Virtual events resources receives notifications for the following changes:
-- **Event:** Refers to virtual event changes.
-- **Session:** Refers to the online meeting sessions created for virtual event.
-- **Registrant:** Refers to participant registration at the event level. While these notifications are at event level, the meta data can contain references to sessions.
-
 Notifications will include the resource url of the changed resource. A separate request to graph will be required to obtain the information of the changed resource.
 
 The below table indicates the supported notification and change types for the virtual events resource.
@@ -278,7 +273,7 @@ The below table indicates the supported notification and change types for the vi
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
-      "@odata.type": "#microsoft.graph.virtualEvent",
+      "@odata.type": "#microsoft.graph.virtualEventSession",
       "id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}"
     }
   }]
@@ -297,7 +292,7 @@ The below table indicates the supported notification and change types for the vi
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
-      "@odata.type": "#microsoft.graph.virtualEvent",
+      "@odata.type": "#microsoft.graph.virtualEventSession",
       "id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}"
     }
   }]
@@ -316,7 +311,7 @@ The below table indicates the supported notification and change types for the vi
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
-      "@odata.type": "#microsoft.graph.virtualEvent",
+      "@odata.type": "#microsoft.graph.virtualEventSession",
       "id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}"
     }
   }]
@@ -339,7 +334,7 @@ For more information about the types of notifications received for meeting call 
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "solutions/virtualEvents/events/{eventId}/microsoft.graph.virtualEventWebinar/registration/registrants/{registrantId}",
-      "@odata.type": "#microsoft.graph.virtualEvent",
+      "@odata.type": "#microsoft.graph.virtualEventRegistrant",
       "id": "solutions/virtualEvents/events/{eventId}/microsoft.graph.virtualEventWebinar/registration/registrants/{registrantId}"
     }
   }]
@@ -358,7 +353,7 @@ For more information about the types of notifications received for meeting call 
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "solutions/virtualEvents/events/{eventId}/microsoft.graph.virtualEventWebinar/registration/registrants/{registrantId}",
-      "@odata.type": "#microsoft.graph.virtualEvent",
+      "@odata.type": "#microsoft.graph.virtualEventRegistrant",
       "id": "solutions/virtualEvents/events/{eventId}/microsoft.graph.virtualEventWebinar/registration/registrants/{registrantId}"
     }
   }]
@@ -377,7 +372,7 @@ For more information about the types of notifications received for meeting call 
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "solutions/virtualEvents/events/{eventId}/microsoft.graph.virtualEventWebinar/registration/registrants/{registrantId}",
-      "@odata.type": "#microsoft.graph.virtualEvent",
+      "@odata.type": "#microsoft.graph.virtualEventRegistrant",
       "id": "solutions/virtualEvents/events/{eventId}/microsoft.graph.virtualEventWebinar/registration/registrants/{registrantId}"
     }
   }]
