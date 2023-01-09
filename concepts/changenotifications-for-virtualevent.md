@@ -11,7 +11,7 @@ ms.custom: scenarios:getting-started
 
 ## Subscribe to notifications for virtual event updates.
 
-Please review webhook subscriptions for more details about the subscription payload. Subscriptions to virtual event resources have a max expiration time of 3 days. Subscriptions must either be created again or renewed. Please review [Subscriptions]() for more details.
+Subscriptions for virtual events can be persisted for a max period of a *single day*. Renewal of subscription or a new subscription must be created to sustain notifications for virtual events. Please review webhook subscriptions for more details about the subscription payload. Subscriptions to virtual event resources have a max expiration time of 3 days. Subscriptions must either be created again or renewed. Please review [Subscriptions]() for more details.
 
 ### Permissions
 
@@ -30,10 +30,11 @@ To get change notifications for virtual events, you may specify the resource as 
 | Event (Tenant-level)                          | solutions/virtualEvents/events                                                  | created                   |
 | Event (Tenant-level, with organizers filters) | solutions/virtualEvents/events/?$filter=organizers in ('{orgId1}', '{orgId2}')  | created                   |
 | Event                                         | solutions/virtualEvents/events/{eventId}                                        | updated, deleted          |
-| Sessions (All sessions for an event)          | solutions/virtualEvents/events/{eventId}/sessions                               | created, updated, deleted |
+| Sessions (Event-level subscription)           | solutions/virtualEvents/events/{eventId}/sessions                               | created                   |
+| Sessions                                      | solutions/virtualEvents/events/{eventId}/sessions/{sessionId}                   | updated, deleted          |
 | Session meeting call                          | communications/onlineMeetings/?$filter=JoinWebUrl eq '{meetingJoinUrl}'         | updated                   |
-| Registrant (All registants for an event) | solutions/virtualEvents/events/{eventId}/microsoft.graph.virtualeventwebinar/registration/registrants               | created, updated, deleted |
-| Attendance report                        | ***solutions/virtualEvents/events/{eventId}/sessions/{sessionId}/attendanceReports*** | TBD                       |
+| Registrant (All registants for an event)      | solutions/virtualEvents/events/{eventId}/microsoft.graph.virtualeventwebinar/registration/registrants             | created, updated, deleted |
+| Attendance report                             | ***solutions/virtualEvents/events/{eventId}/sessions/{sessionId}/attendanceReports*** | TBD                       |
 
 **Note:** Replace values with paranthesis with actual values.
 
@@ -102,9 +103,9 @@ Content-Type: application/json
 }
 ```
 
-### Subscribe to all sessions' changes for a particular event.
+### Subscribe to sessions created for a particular virtual event.
 
-Session notifications for a particular event can be subscribed to by specifying the resource as `solutions/virtualEvents/events/{eventId}/sessions`.
+Session create notifications for a particular event can be subscribed to by specifying the resource as `solutions/virtualEvents/events/{eventId}/sessions`.
 
 Only a single session level subscription can exist for a particular event for a unique app and tenant combination.
 
@@ -117,6 +118,26 @@ Content-Type: application/json
   "notificationUrl": "https://webhook.contoso.com/api",
   "lifecycleNotificationUrl": "https://webhook.contoso.com/api",
   "resource": "solutions/virtualEvents/events/{eventId}/sessions",
+  "expirationDateTime": "2021-02-01T11:00:00.0000000Z",
+  "clientState": "secretClientState"
+}
+```
+
+### Subscribe to a specific sessions' updated and deleted events.
+
+Updated and deleted notifications for a particular session for a virtual event can be subscribed to by specifying the resource as `solutions/virtualEvents/events/{eventId}/sessions/{sessionId}`.
+
+Only a single subscription can be created for a unique tenant, application, and resource combination.
+
+```HTTP
+POST https://graph.microsoft.com/beta/subscriptions
+Content-Type: application/json
+
+{
+  "changeType": "created, updated, deleted",
+  "notificationUrl": "https://webhook.contoso.com/api",
+  "lifecycleNotificationUrl": "https://webhook.contoso.com/api",
+  "resource": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
   "expirationDateTime": "2021-02-01T11:00:00.0000000Z",
   "clientState": "secretClientState"
 }
@@ -288,7 +309,7 @@ The below table indicates the supported notification and change types for the vi
     "clientState": "secret client state",
     "changeType": "updated",
     "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
-    "resource": "solutions/virtualEvents/events/{eventId}/sessions",
+    "resource": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
@@ -307,7 +328,7 @@ The below table indicates the supported notification and change types for the vi
     "clientState": "secret client state",
     "changeType": "deleted",
     "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
-    "resource": "solutions/virtualEvents/events/{eventId}/sessions",
+    "resource": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
