@@ -312,7 +312,7 @@ The below table indicates the supported notification and change types for the vi
     "resource": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
-      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/sessionId}{sessionId}",
       "@odata.type": "#microsoft.graph.virtualEventSession",
       "id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}"
     }
@@ -331,7 +331,7 @@ The below table indicates the supported notification and change types for the vi
     "resource": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
-      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
+      "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/sessionId}{sessionId}",
       "@odata.type": "#microsoft.graph.virtualEventSession",
       "id": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}"
     }
