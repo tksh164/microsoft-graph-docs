@@ -55,6 +55,6 @@ After you enable metered APIs for your application, the application can successf
 
 When API calls generate billing records, those records will be available in the Azure Commerce Experience.
 
-Receiving a bill for Microsoft Graph Services
+## Receiving a bill for Microsoft Graph Services
 After the subscription billing cycle runs, typically on the 5th day of the month, a subscription owner or users with role-based permissions can download an invoice. For details, see [View and download your Azure invoice | Microsoft Docs](https://docs.microsoft.com/en-us/azure/cost-management-billing/understand/download-azure-invoice).
 The invoice will include the following elements: Service Family, Service Name, Meter Category, Subcategory, consumed qty, included qty, price, and extended amount. For more details, see [Understand your Azure invoice | Microsoft Docs](https://docs.microsoft.com/en-us/azure/cost-management-billing/understand/understand-invoice).
