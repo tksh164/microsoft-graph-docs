@@ -1,3 +1,11 @@
+---
+title: "Onboard to Microsoft Graph Metered APIs"
+description: "Provides instructions to onboard an app for calling metered APIs in Microsoft Graph."
+author: "JeremyKelley"
+ms.localizationpriority: high
+ms.custom: scenarios:getting-started
+---
+
 # Onboard to Microsoft Graph Metered APIs
 
 Some APIs included in the Microsoft Graph are metered and require payment for use. 

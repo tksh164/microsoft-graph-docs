@@ -1,3 +1,11 @@
+---
+title: "Metered APIs in Microsoft Graph"
+description: "Provides an overview of metered APIs on Microsoft Graph."
+author: "JeremyKelley"
+ms.localizationpriority: high
+ms.custom: scenarios:getting-started
+---
+
 # Metered APIs in Microsoft Graph
 
 Microsoft Graph includes APIs that are both available at no additional cost with service licenses as well as APIs that are metered. Metered APIs incur a cost per API call made.
