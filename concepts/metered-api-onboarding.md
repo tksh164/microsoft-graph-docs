@@ -25,7 +25,7 @@ Before accessing metered APIs, you must complete the following prerequisite step
 - The target application must be a confidential client application (for example, web app, web API, or daemon / service). Public client applications are not supported (desktop apps, mobile apps).
 - Create an Azure Subscription in the same tenant as the application registration.
 - Make sure that you have permissions for managing both the application registration and the Azure Subscription you wish to use.
-- If the APIs you plan to use are Protected APIs, submit the [request form for Teams](https://learn.microsoft.com/en-us/graph/teams-protected-apis) or [request form for SharePoint](https://aka.ms/PreviewSPOPremiumAPI) depending on which APIs you are calling.
+- If the APIs you plan to use are Protected APIs, submit the [request form for Teams](teams-protected-apis.md) or [request form for SharePoint](https://aka.ms/PreviewSPOPremiumAPI) depending on which APIs you are calling.
 
 ## Enabling an app
 Application owners can enable their apps to consume metered APIs by associating their app to an Azure Subscription by creating an Azure ARM resource type (Microsoft.GraphServices/accounts) in the Azure Subscription that will be used for billing. The Azure ARM resource will map 1:1 with an Azure Active Directory app registration. Creating the assocation will enable the following Azure Cost Management and Billing experiences: Cost Analysis, Budgets and Alerts, and Export CSV.
@@ -56,5 +56,5 @@ After you enable metered APIs for your application, the application can successf
 When API calls generate billing records, those records will be available in the Azure Commerce Experience.
 
 ## Receiving a bill for Microsoft Graph Services
-After the subscription billing cycle runs, typically on the 5th day of the month, a subscription owner or users with role-based permissions can download an invoice. For details, see [View and download your Azure invoice | Microsoft Docs](https://docs.microsoft.com/en-us/azure/cost-management-billing/understand/download-azure-invoice).
-The invoice will include the following elements: Service Family, Service Name, Meter Category, Subcategory, consumed qty, included qty, price, and extended amount. For more details, see [Understand your Azure invoice | Microsoft Docs](https://docs.microsoft.com/en-us/azure/cost-management-billing/understand/understand-invoice).
+After the subscription billing cycle runs, typically on the 5th day of the month, a subscription owner or users with role-based permissions can download an invoice. For details, see [View and download your Azure invoice | Microsoft Docs](https://docs.microsoft.com/azure/cost-management-billing/understand/download-azure-invoice).
+The invoice will include the following elements: Service Family, Service Name, Meter Category, Subcategory, consumed qty, included qty, price, and extended amount. For more details, see [Understand your Azure invoice | Microsoft Docs](https://docs.microsoft.com/azure/cost-management-billing/understand/understand-invoice).
