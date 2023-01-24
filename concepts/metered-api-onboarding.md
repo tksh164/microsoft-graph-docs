@@ -50,7 +50,7 @@ az resource create --resource-group ==myRG== --name ==myGraphAppBilling== --reso
 
 ![Successfully associated application to Azure Subscription](images/metered-apis/cloud-shell-success.png)
 
-##Consuming metered APIs in your app
+## Consuming metered APIs in your app
 After you enable metered APIs for your application, the application can successfully make API calls for metered APIs, and charges accrue in the associated Azure subscription where you created the Microsoft.GraphServices/accounts resource. If you have not completed the above steps, calling metered APIs may result in a `402 Payment required` error code being returned.
 
 When API calls generate billing records, those records will be available in the Azure Commerce Experience.
