@@ -33,21 +33,22 @@ Application owners can enable their apps to consume metered APIs by associating 
 Use the following steps to create and link a Microsoft.GraphServices/accounts Azure Resource to your application:
 1. Sign in to https://portal.azure.com
 2. Go to Subscriptions or open [Subscriptions - Microsoft Azure](https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade)
-IMAGE GOES HERE
+![Azure Subscriptions in the Azure Portal](images/metered-apis/azure-subscription.png)
 3. On the **Subscriptions** page, choose the subscription that you will use for your API consumption charges.
-IMAGE GOES HERE
+![Choose an Azure Subscription for API consumption charges](images/metered-apis/choose-subscription.png)
 4. When the subscription opens, on the left pane choose Resource Providers, search for "graph", select **Microsoft.GraphServices**, and choose Register.
+![Register the Microsoft.GraphServices resource provider](images/metered-apis/resource-providers.png)
 5. Go back to the home page, choose **Cloud Shell**, and then choose **Bash**.
-IMAGE GOES HERE
+![Choose Cloud Shell](images/metered-apis/cloud-shell.png)
 Note: If you're using Cloud Shell for the first time you might need to create a storage account.  Select an Azure subscription, choose **Create** and follow the instructions to create a storage account.
-IMAGE GOES HERE
+![May need to create a storage account to access Cloud Shell](images/metered-apis/no-storage.png)
 6. Copy the command below, paste into Cloud Shell and replace the highlighted text with your own value, type <**Enter**>. The result will be a JSON representation of your Microsoft.GraphServices/accounts resource.
 
 ```Cloud Shell
 az resource create --resource-group ==myRG== --name ==myGraphAppBilling== --resource-type Microsoft.GraphServices/accounts --properties  "{\"appId\": \"==<GUID>==\"}" --latest-include-preview --location Global –subscription ==<GUID>==
 ```
 
-IMAGE GOES HERE
+![Successfully associated application to Azure Subscription](images/metered-apis/cloud-shell-success.png)
 
 ##Consuming metered APIs in your app
 After you enable metered APIs for your application, the application can successfully make API calls for metered APIs, and charges accrue in the associated Azure subscription where you created the Microsoft.GraphServices/accounts resource. If you have not completed the above steps, calling metered APIs may result in a `402 Payment required` error code being returned.
