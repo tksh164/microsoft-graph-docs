@@ -11,13 +11,13 @@ ms.custom: scenarios:getting-started
 
 ## Subscribe to notifications for virtual event updates.
 
-Subscriptions for virtual events can be persisted for a max period of a *single day*. Renewal of subscription or a new subscription must be created to sustain notifications for virtual events. Please review webhook subscriptions for more details about the subscription payload. Subscriptions to virtual event resources have a max expiration time of 3 days. Subscriptions must either be created again or renewed. Please review [Subscriptions]() for more details.
+Subscriptions for virtual events can be persisted for a max period of a *single day*. Renewal of subscription or a new subscription must be created to sustain notifications for virtual events. Please review webhook subscriptions for more details about the subscription payload. Subscriptions to virtual event resources have a max expiration time of 1 day. Subscriptions must either be created again or renewed. Please review [Subscriptions]() for more details.
 
 ### Permissions
 
 | Permission type                       | Permissions (from least to most privileged)              | Supported versions |
 |:--------------------------------------|:---------------------------------------------------------|:-------------------|
-| Delegated (work or school account)    | Not supported.                                           | Not supported.     |
+| Delegated (work or school account)    | Not supported.                                           | Not support        |
 | Delegated (personal Microsoft account)| Not supported.                                           | Not supported.     |
 | Application                           | VirutalEvent.Read.All                                    | beta               |
 
@@ -30,8 +30,7 @@ To get change notifications for virtual events, you may specify the resource as 
 | Event (Tenant-level)                          | solutions/virtualEvents/events                                                  | created                   |
 | Event (Tenant-level, with organizers filters) | solutions/virtualEvents/events/?$filter=organizers in ('{orgId1}', '{orgId2}')  | created                   |
 | Event                                         | solutions/virtualEvents/events/{eventId}                                        | updated, deleted          |
-| Sessions (Event-level subscription)           | solutions/virtualEvents/events/{eventId}/sessions                               | created                   |
-| Sessions                                      | solutions/virtualEvents/events/{eventId}/sessions/{sessionId}                   | updated, deleted          |
+| Sessions (Event-level subscription)           | solutions/virtualEvents/events/{eventId}/sessions                               | created, updated, deleted                   |
 | Session meeting call                          | communications/onlineMeetings/?$filter=JoinWebUrl eq '{meetingJoinUrl}'         | updated                   |
 | Registrant (All registants for an event)      | solutions/virtualEvents/events/{eventId}/microsoft.graph.virtualeventwebinar/registration/registrants             | created, updated, deleted |
 | Attendance report                             | ***solutions/virtualEvents/events/{eventId}/sessions/{sessionId}/attendanceReports*** | TBD                       |
@@ -57,16 +56,10 @@ Content-Type: application/json
 }
 ```
 
-### Subscribe to all created events with relevant organizer and co-organizers.
+### Subscribe to all created events with relevant organizerss.
 
 Subscriptions to all created events for a tenant where a group of organizers/coorganizers are a part of can be accomplished with the resource specified as 
 `"solutions/virtualEvents/events/?$filter=organizers in ('{userA}', '{userB}', '{userC}')"`. Creating a subscription with query params will mean that any notifications created for the tenant will be notified if userA, userB, or userC are either the organizer or co-organizer for created event.
-
-***For this case we are proposing that***:
- - A.) There are no differences for the subscription context between organizers and co-organizers 
- - B.) Any Id found in filter is relevant for notifications to be delivered to.
-
-***Implementation question, how are we deciding subscription uniqueness for either cases?***
 
 ```HTTP
 POST https://graph.microsoft.com/beta/subscriptions
@@ -103,9 +96,9 @@ Content-Type: application/json
 }
 ```
 
-### Subscribe to sessions created for a particular virtual event.
+### Subscribe to sessions notifications for a particular virtual event.
 
-Session create notifications for a particular event can be subscribed to by specifying the resource as `solutions/virtualEvents/events/{eventId}/sessions`.
+Session notifications for a particular event can be subscribed to by specifying the resource as `solutions/virtualEvents/events/{eventId}/sessions`.
 
 Only a single session level subscription can exist for a particular event for a unique app and tenant combination.
 
@@ -118,26 +111,6 @@ Content-Type: application/json
   "notificationUrl": "https://webhook.contoso.com/api",
   "lifecycleNotificationUrl": "https://webhook.contoso.com/api",
   "resource": "solutions/virtualEvents/events/{eventId}/sessions",
-  "expirationDateTime": "2021-02-01T11:00:00.0000000Z",
-  "clientState": "secretClientState"
-}
-```
-
-### Subscribe to a specific sessions' updated and deleted events.
-
-Updated and deleted notifications for a particular session for a virtual event can be subscribed to by specifying the resource as `solutions/virtualEvents/events/{eventId}/sessions/{sessionId}`.
-
-Only a single subscription can be created for a unique tenant, application, and resource combination.
-
-```HTTP
-POST https://graph.microsoft.com/beta/subscriptions
-Content-Type: application/json
-
-{
-  "changeType": "created, updated, deleted",
-  "notificationUrl": "https://webhook.contoso.com/api",
-  "lifecycleNotificationUrl": "https://webhook.contoso.com/api",
-  "resource": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
   "expirationDateTime": "2021-02-01T11:00:00.0000000Z",
   "clientState": "secretClientState"
 }
