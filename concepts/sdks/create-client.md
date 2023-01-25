@@ -31,14 +31,14 @@ var options = new TokenCredentialOptions
 };
 
 // Callback function that receives the user prompt
-// Prompt contains the generated device code that use must
+// Prompt contains the generated device code that you must
 // enter during the auth process in the browser
 Func<DeviceCodeInfo, CancellationToken, Task> callback = (code, cancellation) => {
     Console.WriteLine(code.Message);
     return Task.FromResult(0);
 };
 
-// https://docs.microsoft.com/dotnet/api/azure.identity.devicecodecredential
+// https://learn.microsoft.com/dotnet/api/azure.identity.devicecodecredential
 var deviceCodeCredential = new DeviceCodeCredential(
     callback, tenantId, clientId, options);
 
@@ -169,7 +169,6 @@ import (
     "fmt"
 
     azidentity "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
-    a "github.com/microsoft/kiota-authentication-azure-go"
     msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
 )
 
@@ -186,19 +185,7 @@ if err != nil {
     return
 }
 
-auth, err := a.NewAzureIdentityAuthenticationProviderWithScopes(cred, []string{"User.Read"})
-
-if err != nil {
-    fmt.Printf("Error authentication provider: %v\n", err)
-    return
-}
-
-adapter, err := msgraphsdk.NewGraphRequestAdapter(auth)
-if err != nil {
-    fmt.Printf("Error creating adapter: %v\n", err)
-    return
-}
-client := msgraphsdk.NewGraphServiceClient(adapter)
+client := msgraphsdk.NewGraphServiceClientWithCredentials(cred, []string{"User.Read"})
 ```
 
 ---

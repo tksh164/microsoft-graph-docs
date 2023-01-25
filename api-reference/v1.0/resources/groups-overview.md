@@ -1,17 +1,18 @@
 ---
 title: "Working with groups in Microsoft Graph"
-description: "Groups are collections of principals with shared access to resources in Microsoft services or in your app. Different principals such as users, other groups, devices, and applications can be part of groups. Using groups helps you avoid working with individual principals and simplifies management of access to your resources."
+description: "Use the groups API to create and manage different types of groups such as Microsoft 365 groups, security groups, mail-enabled security groups, and distribution groups."
 author: "psaffaie"
 ms.localizationpriority: high
 ms.prod: "groups"
 doc_type: conceptualPageType
+ms.date: 11/16/2022
 ---
 
 # Working with groups in Microsoft Graph
 
 Groups are collections of principals with shared access to resources in Microsoft services or in your app. Different principals such as users, other groups, devices, and applications can be part of groups. Using groups helps you avoid working with individual principals and simplifies management of access to your resources.
 
-Microsoft Graph exposes the groups API to create and manage different types of groups and group functionality. 
+Microsoft Graph exposes the groups API to create and manage different types of groups and group functionality.
 
 > [!NOTE]
 > 1. Groups can only be created through work or school accounts. Personal Microsoft accounts don't support groups.
@@ -27,7 +28,7 @@ Azure Active Directory (Azure AD) supports the following types of groups.
 - Distribution groups
 
 > [!NOTE]
-> Microsoft also supports [dynamic distribution groups](/exchange/recipients/dynamic-distribution-groups/dynamic-distribution-groups?view=exchserver-2019) which cannot be managed or retrieved through Microsoft Graph.
+> Microsoft also supports [dynamic distribution groups](/exchange/recipients/dynamic-distribution-groups/dynamic-distribution-groups?view=exchserver-2019&preserve-view=true) which cannot be managed or retrieved through Microsoft Graph.
 
 Only Microsoft 365 and security groups can be managed through the Microsoft Graph groups API. Mail-enabled and distribution groups are read-only through Microsoft Graph.
 
@@ -91,7 +92,7 @@ To learn more about Microsoft 365 groups and the administrator experiences, see 
 
 **Security groups** are for controlling user access to resources. By checking whether a user is a member of a security group, your app can make authorization decisions when that user is trying to access some secure resources in your app. Security groups can have users, other security groups, devices, and service principals as members.
 
-**Mail-enabled security groups** are used in the same way as security groups, but with the added feature of a shared mailbox. Mail-enabled security groups can't be created or updated through the API; instead, they're read-only. Learn more in the [Manage mail-enabled security groups Exchange article](/Exchange/recipients/mail-enabled-security-groups).
+**Mail-enabled security groups** are used in the same way as security groups, but can be used to send emails to group members. Mail-enabled security groups can't be created or updated through the API; instead, they're read-only. Learn more in the [Manage mail-enabled security groups Exchange article](/Exchange/recipients/mail-enabled-security-groups).
 
 The following JSON object shows a sample representation of a group when you call the Microsoft Graph groups API.
 
@@ -117,7 +118,13 @@ Content-type: application/json
 }
 ```
 
-## Dynamic membership
+## Group membership
+
+Not all object types can be members of both Microsoft 365 and security groups.
+
+[!INCLUDE [groups-allowed-member-types](../../../concepts/includes/groups-allowed-member-types.md)]
+
+### Dynamic membership
 
 All types of groups can have dynamic membership rules that automatically add or remove members from the group based on the principal's properties. For example, a "Marketing employees" group can define a dynamic membership rule that only users with their department property set to "Marketing" can be members of the group. In this case, any user's who leave the department are automatically removed from the group. 
 
@@ -150,7 +157,7 @@ To learn more about formulating membership rules, see [Dynamic membership rules 
 
 ## Other types of groups
 
-Microsoft 365 groups in Yammer are used to facilitate user collaboration through Yammer posts. This type of group can be returned through a read request, but their posts can't be accessed through the API. When Yammer posts and conversation feeds are enabled on a group, default Microsoft 365 group conversations are disabled. To learn more, see [Yammer developer API docs](https://developer.yammer.com/docs).
+Microsoft 365 groups in Yammer are used to facilitate user collaboration through Yammer posts. This type of group can be returned through a read request, but their posts can't be accessed through the API. When Yammer posts and conversation feeds are enabled on a group, default Microsoft 365 group conversations are disabled. To learn more, see [Yammer developer API docs](/rest/api/yammer).
 
 ## Group search limitations for guest users in organizations
 
@@ -160,16 +167,13 @@ If the signed-in user is a guest user, depending on the permissions an app has b
 
 With the appropriate permissions, the app can read the profiles of groups that it obtains by following links in navigation properties; for example, `/groups/{id}/members`.
 
-For more information about what guest users can do with groups, see [Compare member and guest default permissions](/azure/active-directory/fundamentals/users-default-permissions#compare-member-and-guest-default-permissions).
+For more information about what guest users can do with groups, see [Compare member and guest default permissions](/azure/active-directory/fundamentals/users-default-permissions?context=graph/context#compare-member-and-guest-default-permissions).
 
 ## Group-based licensing
 
 You can use group-based licensing to assign one or more product licenses to an Azure AD group. Azure AD ensures that the licenses are assigned to all members of the group. Any new members who join the group are assigned the appropriate licenses. When they leave the group, those licenses are removed. The feature can only be used with security groups and Microsoft 365 groups that have `securityEnabled=TRUE`. To learn more about group-based licensing, see [What is group-based licensing in Azure Active Directory?](/azure/active-directory/fundamentals/active-directory-licensing-whatis-azure-portal).
 
 ## Common use cases
-
-Using Microsoft Graph, you can perform the following common operations.
-
 
 Using Microsoft Graph, you can perform the following common operations on groups.
 

@@ -7,15 +7,14 @@ description: "Automatically generated file. DO NOT MODIFY"
 //THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
 graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-headers := map[string]string{
-	"If-Match": "W/"JyI0NzAwNjg0NS0wMDAwLTE5MDAtMDAwMC02MGY0Yjg4MzAwMDAiJw==""
-}
-options := &msgraphsdk.DelegatedAdminAccessAssignmentRequestBuilderDeleteRequestConfiguration{
+headers := abstractions.NewRequestHeaders()
+headers.Add("If-Match", "W/\"JyI0NzAwNjg0NS0wMDAwLTE5MDAtMDAwMC02MGY0Yjg4MzAwMDAiJw==\"")
+
+configuration := &graphconfig.TenantRelationshipsDelegatedAdminRelationshipItemAccessAssignmentItemRequestBuilderDeleteRequestConfiguration{
 	Headers: headers,
 }
-delegatedAdminRelationshipId := "delegatedAdminRelationship-id"
-delegatedAdminAccessAssignmentId := "delegatedAdminAccessAssignment-id"
-graphClient.TenantRelationships().DelegatedAdminRelationshipsById(&delegatedAdminRelationshipId).AccessAssignmentsById(&delegatedAdminAccessAssignmentId).DeleteWithRequestConfigurationAndResponseHandler(options, nil)
+
+graphClient.TenantRelationships().DelegatedAdminRelationshipsById("delegatedAdminRelationship-id").AccessAssignmentsById("delegatedAdminAccessAssignment-id").Delete(context.Background(), configuration)
 
 
 ```
