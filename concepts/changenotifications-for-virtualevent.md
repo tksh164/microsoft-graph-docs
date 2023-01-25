@@ -282,7 +282,7 @@ The below table indicates the supported notification and change types for the vi
     "clientState": "secret client state",
     "changeType": "updated",
     "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
-    "resource": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
+    "resource": "solutions/virtualEvents/events/{eventId}/sessions",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/sessionId}{sessionId}",
@@ -301,7 +301,7 @@ The below table indicates the supported notification and change types for the vi
     "clientState": "secret client state",
     "changeType": "deleted",
     "tenantId": "f5b076c8-b508-4ba3-a1a7-19d1c0bcef03",
-    "resource": "solutions/virtualEvents/events/{eventId}/sessions/{sessionId}",
+    "resource": "solutions/virtualEvents/events/{eventId}/sessions",
     "subscriptionExpirationDateTime": "2023-01-28T00:00:00.0000000Z",
     "resourceData": {
       "@odata.id": "solutions/virtualEvents/events/{eventId}/sessions/sessionId}{sessionId}",
