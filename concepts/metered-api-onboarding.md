@@ -45,7 +45,7 @@ Note: If you're using Cloud Shell for the first time you might need to create a 
 6. Copy the command below, paste into Cloud Shell and replace the highlighted text with your own value, type <**Enter**>. The result will be a JSON representation of your Microsoft.GraphServices/accounts resource.
 
 ```Cloud Shell
-az resource create --resource-group ==myRG== --name ==myGraphAppBilling== --resource-type Microsoft.GraphServices/accounts --properties  "{\"appId\": \"==<GUID>==\"}" --latest-include-preview --location Global –subscription ==<GUID>==
+az resource create --resource-group myRG --name myGraphAppBilling --resource-type Microsoft.GraphServices/accounts --properties  "{\"appId\": \"<GUID>\"}" --latest-include-preview --location Global –subscription <GUID>
 ```
 
 ![Successfully associated application to Azure Subscription](images/metered-apis/cloud-shell-success.png)
