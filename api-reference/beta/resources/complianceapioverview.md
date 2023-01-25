@@ -17,12 +17,22 @@ Use the Microsoft Graph compliance and privacy APIs to build applications that:
 
 - Automate common tasks in eDiscovery
 - Create and manage subject rights requests
+- Automate tasks in records management
 
 ## eDiscovery
 
 eDiscovery in Microsoft 365 provides an end-to-end workflow to preserve, collect, review, analyze, and export data that's responsive to your organization's internal and external investigations. Learn more about [Microsoft 365 Advanced eDiscovery](/microsoft-365/compliance/overview-ediscovery-20).
 
 Explore the [Microsoft 365 eDiscovery APIs](ediscovery-ediscoveryapioverview.md).
+
+## Records management (preview)
+
+Records management in Microsoft Purview provides the ability to manage regulatory, legal, and business-critical records across corporate data. It helps organizations manage retention and deletion of data to meet their legal obligations and compliance regulations, and increases efficiency by enabling the regular disposition of items that no longer have to be retained.
+
+For more details, see [Microsoft Purview records management](/microsoft-365/compliance/records-management).
+
+The records management API is defined in the OData subnamespace, microsoft.graph.security.
+Explore the [Microsoft Purview records management APIs](security-recordsManagement-overview.md).
 
 ## Subject rights request
 

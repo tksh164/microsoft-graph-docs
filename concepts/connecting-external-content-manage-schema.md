@@ -1,6 +1,6 @@
 ---
 title: "Register and update schema for the Microsoft Graph connection"
-description: "Learn how to use Microsoft Graph to register schema for your Microsoft Graph connection."
+description: "Before adding items into a connection, you must register the schema. Describes example schema, property attributes, semantic labels, and schema update capabilities."
 ms.localizationpriority: high
 author: mecampos
 doc_type: conceptualPageType
@@ -10,26 +10,26 @@ ms.prod: search
 
 # Register and update schema for the Microsoft Graph connection
 
-The connection [schema](/graph/api/resources/externalconnectors-schema?view=graph-rest-1.0&preserve-view=true) determines how your content is used in various Microsoft Graph experiences. The schema is a flat list of all the properties that you plan to add to the connection along with their attributes, labels, and aliases. You must register the schema before adding items into the connection.
+The connection [schema](/graph/api/resources/externalconnectors-schema) determines how your content is used in various Microsoft Graph experiences. The schema is a flat list of all the properties that you plan to add to the connection along with their attributes, labels, and aliases. You must register the schema before adding items into the connection.
 
 ## Example schema
 
 The following table represents an example of a possible schema for a work ticket system connector.
 
-| Property       | Type             | Searchable         | Queryable          | Retrievable        | Refinable          | Labels               | Aliases    |
-|----------------|------------------|--------------------|--------------------|--------------------|--------------------|----------------------|------------|
-| ticketId       | String           |                    |                    |                    |                    |                      | ID         |
-| title          | String           | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |                    | title                |            |
-| createdBy      | String           | :heavy_check_mark: | :heavy_check_mark: |                    |                    | createdBy            | creator    |
-| assignedTo     | String           | :heavy_check_mark: | :heavy_check_mark: |                    |                    |                      |            |
-| lastEditedDate | DateTime         |                    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | lastModifiedDateTime | editedDate |
-| lastEditedBy   | String           | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |                    | lastModifiedBy       | edited     |
-| workItemType   | String           |                    | :heavy_check_mark: | :heavy_check_mark: |                    |                      | ticketType |
-| priority       | Int64            | :heavy_check_mark: |                    |                    |                    |                      |            |
-| tags           | StringCollection |                    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |                      |            |
-| status         | String           |                    | :heavy_check_mark: | :heavy_check_mark: |                    |                      |            |
-| url            | String           |                    |                    |                    |                    | url                  |            |
-| resolved       | Boolean          |                    | :heavy_check_mark: | :heavy_check_mark: |                    |                      |            |
+| Property       | Type             | Searchable         | Queryable          | Retrievable        | Refinable          | Exact Match Required | Labels               | Aliases    |
+|----------------|------------------|--------------------|--------------------|--------------------|--------------------|----------------------|----------------------|------------|
+| ticketId       | String           |                    | :heavy_check_mark: |                    |                    | :heavy_check_mark:   |                      | ID         |
+| title          | String           | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |                    |                      | title                |            |
+| createdBy      | String           | :heavy_check_mark: | :heavy_check_mark: |                    |                    |                      | createdBy            | creator    |
+| assignedTo     | String           | :heavy_check_mark: | :heavy_check_mark: |                    |                    |                      |                      |            |
+| lastEditedDate | DateTime         |                    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |                      | lastModifiedDateTime | editedDate |
+| lastEditedBy   | String           | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |                    |                      | lastModifiedBy       | edited     |
+| workItemType   | String           |                    | :heavy_check_mark: | :heavy_check_mark: |                    |                      |                      | ticketType |
+| priority       | Int64            | :heavy_check_mark: |                    |                    |                    |                      |                      |            |
+| tags           | StringCollection |                    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:   |                      |            |
+| status         | String           |                    | :heavy_check_mark: | :heavy_check_mark: |                    |                      |                      |            |
+| url            | String           |                    |                    |                    |                    |                      | url                  |            |
+| resolved       | Boolean          |                    | :heavy_check_mark: | :heavy_check_mark: |                    |                      |                      |            |
 
 ## Property attributes
 
@@ -73,6 +73,22 @@ If a property is refinable, an admin can configure it as a custom filter in the 
 
 *Refine results by `tags`, a refinable property.*
 
+### Exact match required
+
+If **isExactMatchRequired** is `true` for a property, the full string value will be indexed. **isExactMatchRequired** can only be set to `true` for non-searchable properties.
+
+For example, the **ticketId** property is both queryable and specifies exact matching.
+- Querying `ticketId:CTS-ce913b61` will return the item with a ticket ID property **CTS-ce913b61**.
+- Querying `ticketId:CTS` will NOT return the item with ticket ID **CTS-ce913b61**.
+
+Similarly, the **tags** property also specifies exact matching.
+- Querying `tags:contoso` will return any item with the tag **contoso**.
+- Querying `tags:contoso` will NOT return items with the tag **contoso ticket**.
+
+For example, there might be a scenario where the item property is a GUID-formatted string. If this property must be matched exactly for item queries, specify that **isExactMatchRequired** is `true`.
+
+The **title** property does not specify exact matching. If nothing is specified, then **isExactMatchRequired** is `false`. The **title** property will be tokenized based on the tokenization rules of the language of the item content.
+- Querying `title:Contoso Title` will return any item containing "Contoso" or "Title" in the **title** property.
 
 ## Semantic labels
 
@@ -156,7 +172,7 @@ Aliases are friendly names for properties that you assign. These are used in que
 
 ## Schema update capabilities
 
-This section includes information about the update capabilities for the [schema](/graph/api/resources/externalconnectors-schema?view=graph-rest-1.0&preserve-view=true) API.
+This section includes information about the update capabilities for the [schema](/graph/api/resources/externalconnectors-schema) API.
 
 > [!NOTE]
 > We recommend that you reingest items after an update to bring them to the latest schema. Without reingestion, the behavior of the items will be inconsistent.
@@ -186,7 +202,7 @@ Adding a semantic label can affect experiences like Relevance and Viva Topics.
 ## Next steps
 
 - [Add items to the connection](connecting-external-content-manage-items.md)
-- [Review the Microsoft Graph connectors API reference](/graph/api/resources/indexing-api-overview?view=graph-rest-1.0&preserve-view=true)
+- [Review the Microsoft Graph connectors API reference](/graph/api/resources/indexing-api-overview)
 - [Search custom types (externalItem)](search-concept-custom-types.md)
 - [Build your first custom Microsoft Graph connector](/graph/connecting-external-content-build-quickstart)
 
