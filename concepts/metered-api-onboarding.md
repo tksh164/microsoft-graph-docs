@@ -8,14 +8,16 @@ ms.custom: scenarios:getting-started
 
 # Onboard to Microsoft Graph Metered APIs
 
-Some APIs included in the Microsoft Graph are metered and require payment for use. 
+Some APIs included in Microsoft Graph are metered and require payment for use. 
 
 Examples of APIs that are currently metered include:
-- Teams chat / channel export
-- Teams chat / channel change notifications
-- Teams conversationMember change notifications
-- Teams chat / channel message PATCH operations
-- SharePoint assignSensitivityLabel
+- Teams [chat](/graph/api/chats-getallmessages.md) / [channel](/graph/api/channel-getallmessages.md) export
+- Teams chat / channel [change notifications](/graph/api/subscription-post-subscriptions.md)
+- Teams conversationMember [change notifications](/graph/api/subscription-post-subscriptions.md)
+- Teams chat / channel message [PATCH operations](/graph/api/chatmessage-update.md)
+- SharePoint [assignSensitivityLabel](/graph/api/driveitem-assignsensitivitylabel.md)
+
+See [List of Microsoft Graph metered APIs](metered-api-list.md) for the full list of APIs that may require payment.
 
 To consume metered APIs, the Azure Active Directory registration for the application consuming the APIs must be associated to an Azure Subscription which will be billed for any consumption related charges. These instructions will outline the process of completing this association.
 
