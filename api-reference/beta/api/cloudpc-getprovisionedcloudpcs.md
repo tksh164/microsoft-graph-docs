@@ -33,7 +33,7 @@ One of the following permissions is required to call this API. To learn more, in
 -->
 
 ``` http
-GET /deviceManagement/virtualEndpoint/cloudPCs/getProvisionedCloudPCs({groupId},{servicePlanId})
+GET /deviceManagement/virtualEndpoint/cloudPCs/getProvisionedCloudPCs(groupId='{groupId}',servicePlanId='{servicePlanId}')
 ```
 
 ## Request headers
@@ -71,7 +71,7 @@ The following is an example of a request.
 }
 -->
 ``` http
-GET https://graph.microsoft.com/beta/deviceManagement/virtualEndpoint/cloudPCs/getProvisionedCloudPCs(30d0e128-de93-41dc-89ec-33d84bb662a0,9ecf691d-8b82-46cb-b254-cd061b2c02fb)
+GET https://graph.microsoft.com/beta/deviceManagement/virtualEndpoint/cloudPCs/getProvisionedCloudPCs(groupId='30d0e128-de93-41dc-89ec-33d84bb662a0',servicePlanId='9ecf691d-8b82-46cb-b254-cd061b2c02fb')
 ```
 
 # [C#](#tab/csharp)
